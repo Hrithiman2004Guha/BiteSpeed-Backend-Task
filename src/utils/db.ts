@@ -2,9 +2,12 @@ import { Pool } from "pg";
 import dotenv from 'dotenv';
 dotenv.config();
 export const pool = new Pool({
-    user: 'postgres',
-    host : 'localhost',
-    database: 'bitespeed',
+    user: process.env.POSTGRES_USER,
+    host : process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
-    port: 3000
+    port: parseInt(process.env.POSTGRES_PORT || "5432"),
+    ssl: {
+    rejectUnauthorized: false
+  }
 })
